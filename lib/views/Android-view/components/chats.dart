@@ -222,20 +222,20 @@ class AlertBox extends StatelessWidget {
                                 : null,
                           ),
                           const SizedBox(height: 20),
-                          ElevatedButton(
-                            onPressed: () {
-                              if (stepProvider.imagePath != null) {
-                                stepProvider.forwardStep(context);
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text(
-                                          "Please select a profile photo")),
-                                );
-                              }
-                            },
-                            child: const Text("Continue"),
-                          ),
+                          // ElevatedButton(
+                          //   onPressed: () {
+                          //     if (stepProvider.imagePath != null) {
+                          //       stepProvider.forwardStep(context);
+                          //     } else {
+                          //       ScaffoldMessenger.of(context).showSnackBar(
+                          //         const SnackBar(
+                          //             content: Text(
+                          //                 "Please select a profile photo")),
+                          //       );
+                          //     }
+                          //   },
+                          //   child: const Text("Continue"),
+                          // ),
                         ],
                       );
                     },
@@ -252,7 +252,7 @@ class AlertBox extends StatelessWidget {
                   ),
                 ),
                 Step(
-                  title: const Text("Description"),
+                  title: const Text("Contact"),
                   content: TextField(
                     controller: stepProvider.contactController,
                     decoration: const InputDecoration(

@@ -10,7 +10,7 @@ List<Map<String, dynamic>> allComponents = [
   },
   {
     'label': "Updates",
-    'widget': Updates(),
+    'widget': ChatPage(),
   },
   {
     'label': "Calls",
