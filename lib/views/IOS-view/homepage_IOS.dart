@@ -14,15 +14,11 @@ class _homepage_IOSState extends State<homepage_IOS> {
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
-        backgroundColor: CupertinoColors.black,
-        tabBar: CupertinoTabBar(items: [
+      tabBar: CupertinoTabBar(
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.chat_bubble),
             label: "Chats",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.upload_circle),
-            label: "Updates",
           ),
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.phone),
@@ -32,39 +28,46 @@ class _homepage_IOSState extends State<homepage_IOS> {
             icon: Icon(CupertinoIcons.settings),
             label: "Settings",
           ),
-        ]),
-        tabBuilder: (context, val) {
-          return CupertinoTabView(
-            builder: (context) {
-              return CupertinoPageScaffold(
-                navigationBar: CupertinoNavigationBar(
-                  middle: Text(
-                    "Homepage",
-                    style: TextStyle(color: CupertinoColors.white),
-                  ),
-                  backgroundColor: CupertinoColors.black,
-                  trailing: CupertinoButton(
-                    pressedOpacity: 0.5,
-                    onPressed: () {
-                      Provider.of<PlatformProvider>(context, listen: false)
-                          .changePlatform();
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: 50),
-                      child: Icon(
-                        CupertinoIcons.add,
-                      ),
-                    ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.person),
+            label: "Profile",
+          ),
+        ],
+      ),
+      tabBuilder: (context, index) {
+        return CupertinoTabView(
+          builder: (context) {
+            return CupertinoPageScaffold(
+              navigationBar: CupertinoNavigationBar(
+                middle: const Text(
+                  "Homepage",
+                  style: TextStyle(color: CupertinoColors.white),
+                ),
+                backgroundColor: CupertinoColors.black,
+                trailing: CupertinoButton(
+                  padding: EdgeInsets.zero,
+                  onPressed: () {
+                    Provider.of<PlatformProvider>(context, listen: false)
+                        .changePlatform();
+                  },
+                  child: const Icon(
+                    CupertinoIcons.arrow_2_circlepath_circle,
+                    color: CupertinoColors.white,
                   ),
                 ),
-                child: Center(
-                  child: Container(
-                    child: Text("${allComponents[val]['widget']}"),
-                  ),
-                ),
-              );
-            },
-          );
-        });
+              ),
+              child: Center(
+                child: _getPageContent(index),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _getPageContent(int index) {
+    final component = allComponents[index]['widget'];
+    return component is Widget ? component : Text("Page not available");
   }
 }

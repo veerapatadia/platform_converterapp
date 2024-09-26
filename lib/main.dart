@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:platformconverterapp/provider/bottom_provider.dart';
+import 'package:platformconverterapp/provider/callprovider.dart';
 import 'package:platformconverterapp/provider/contact_provider.dart';
 import 'package:platformconverterapp/provider/image_provider.dart';
 import 'package:platformconverterapp/provider/platform_provider.dart';
@@ -33,6 +34,7 @@ class _myAppState extends State<myApp> {
           ChangeNotifierProvider(create: (context) => BottomProvider()),
           ChangeNotifierProvider(create: (context) => ContactProvider()),
           ChangeNotifierProvider(create: (context) => imageProvider()),
+          ChangeNotifierProvider(create: (context) => CallProvider()),
         ],
         builder: (context, _) {
           return (Provider.of<PlatformProvider>(context).isIOS)

@@ -18,13 +18,13 @@ class _homepage_AndroidState extends State<homepage_Android> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           "Home page",
-          style: TextStyle(color: Colors.white),
-        ),
-        leading: Icon(
-          Icons.menu,
-          color: Colors.white,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
         ),
         actions: [
           IconButton(
@@ -45,9 +45,9 @@ class _homepage_AndroidState extends State<homepage_Android> {
         onPageChanged: (val) {
           Provider.of<BottomProvider>(context, listen: false)
               .bottomNavigation(val);
-          // setState(() {
-          //   bottomNavIndex = val;
-          // });
+          setState(() {
+            bottomNavIndex = val;
+          });
         },
         children: [
           ...allComponents.map((e) => e['widget']),
@@ -62,9 +62,9 @@ class _homepage_AndroidState extends State<homepage_Android> {
           selectedItemColor: Colors.blueAccent,
           onTap: (val) {
             bottomProvider.bottomNavigation(val);
-            // setState(() {
-            //   bottomNavIndex = val;
-            // });
+            setState(() {
+              bottomNavIndex = val;
+            });
             pageController.animateToPage(
               val,
               duration: Duration(milliseconds: 200),
@@ -78,11 +78,6 @@ class _homepage_AndroidState extends State<homepage_Android> {
               backgroundColor: Colors.transparent,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.update),
-              label: "Updates",
-              backgroundColor: Colors.transparent,
-            ),
-            BottomNavigationBarItem(
               icon: Icon(Icons.call),
               label: "Calls",
               backgroundColor: Colors.transparent,
@@ -90,6 +85,11 @@ class _homepage_AndroidState extends State<homepage_Android> {
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
               label: "Settings",
+              backgroundColor: Colors.transparent,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: "Profile",
               backgroundColor: Colors.transparent,
             ),
           ],

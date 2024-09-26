@@ -1,16 +1,13 @@
 import 'package:platformconverterapp/views/Android-view/components/calls.dart';
 import 'package:platformconverterapp/views/Android-view/components/chats.dart';
 import 'package:platformconverterapp/views/Android-view/components/settings.dart';
-import 'package:platformconverterapp/views/Android-view/components/updates.dart';
+
+import '../views/Android-view/components/Profile.dart';
 
 List<Map<String, dynamic>> allComponents = [
   {
     'label': "Chats",
     'widget': Chats(),
-  },
-  {
-    'label': "Updates",
-    'widget': ChatPage(),
   },
   {
     'label': "Calls",
@@ -19,5 +16,9 @@ List<Map<String, dynamic>> allComponents = [
   {
     'label': "Settings",
     'widget': Settings(),
-  }
+  },
+  {
+    'label': "Profile",
+    'widget': Profile(),
+  },
 ];

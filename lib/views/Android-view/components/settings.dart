@@ -22,14 +22,9 @@ class _SettingsState extends State<Settings> {
   @override
   void initState() {
     super.initState();
-
     date = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
-    if (dateTime.hour <= 12) {
-      time = "${timeOfDay.hour}:${timeOfDay.minute} ${timeOfDay.period.name} ";
-    } else {
-      time =
-          "${timeOfDay.hour - 12}:${timeOfDay.minute} ${timeOfDay.period.name} ";
-    }
+    time =
+        "${timeOfDay.hourOfPeriod}:${timeOfDay.minute.toString().padLeft(2, '0')} ${timeOfDay.period.name}";
   }
 
   @override
@@ -37,7 +32,130 @@ class _SettingsState extends State<Settings> {
     return (Provider.of<PlatformProvider>(context).isIOS)
         ? CupertinoPageScaffold(
             child: Container(
-              color: Colors.white,
+              padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+              alignment: Alignment.center,
+              child: Column(
+                children: [
+                  SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Date",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      Text(
+                        date,
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  SizedBox(
+                    height: 45,
+                    width: double.infinity,
+                    child: CupertinoButton(
+                      color: CupertinoColors.activeBlue,
+                      onPressed: () async {
+                        showCupertinoModalPopup(
+                          context: context,
+                          builder: (context) {
+                            return Container(
+                              height: 250,
+                              color: CupertinoColors.black,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 190,
+                                    child: CupertinoDatePicker(
+                                      initialDateTime: dateTime,
+                                      mode: CupertinoDatePickerMode.date,
+                                      onDateTimeChanged: (DateTime picked) {
+                                        setState(() {
+                                          date =
+                                              "${picked.day}/${picked.month}/${picked.year}";
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                  CupertinoButton(
+                                    child: Text("Done",
+                                        style: TextStyle(
+                                            color: CupertinoColors.activeBlue)),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      child: Text("Pick Date"),
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Time",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      Text(
+                        time,
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                  SizedBox(
+                    height: 45,
+                    width: double.infinity,
+                    child: CupertinoButton(
+                      color: CupertinoColors.activeBlue,
+                      onPressed: () async {
+                        showCupertinoModalPopup(
+                          context: context,
+                          builder: (context) {
+                            return Container(
+                              height: 250,
+                              color: CupertinoColors.black,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 190,
+                                    child: CupertinoDatePicker(
+                                      initialDateTime: dateTime,
+                                      mode: CupertinoDatePickerMode.time,
+                                      onDateTimeChanged: (DateTime picked) {
+                                        setState(() {
+                                          time =
+                                              "${picked.hour}:${picked.minute.toString().padLeft(2, '0')} ${picked.hour >= 12 ? 'PM' : 'AM'}";
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                  CupertinoButton(
+                                    child: Text("Done",
+                                        style: TextStyle(
+                                            color: CupertinoColors.activeBlue)),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      child: Text("Pick Time"),
+                    ),
+                  ),
+                ],
+              ),
             ),
           )
         : Container(
@@ -51,17 +169,11 @@ class _SettingsState extends State<Settings> {
                     children: [
                       Text(
                         "Date",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 17,
-                        ),
+                        style: TextStyle(color: Colors.white, fontSize: 17),
                       ),
                       Text(
                         date,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 17,
-                        ),
+                        style: TextStyle(color: Colors.white, fontSize: 17),
                       ),
                     ],
                   ),
@@ -74,7 +186,7 @@ class _SettingsState extends State<Settings> {
                         pickedDate = await showDatePicker(
                           context: context,
                           initialDate:
-                              (pickedDate != null) ? pickedDate : dateTime,
+                              (pickedDate != null) ? pickedDate! : dateTime,
                           firstDate: DateTime(2000),
                           lastDate: DateTime(2050),
                         );
@@ -88,25 +200,17 @@ class _SettingsState extends State<Settings> {
                       child: Text("Pick Date"),
                     ),
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
+                  SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         "Time",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 17,
-                        ),
+                        style: TextStyle(color: Colors.white, fontSize: 17),
                       ),
                       Text(
                         time,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 17,
-                        ),
+                        style: TextStyle(color: Colors.white, fontSize: 17),
                       ),
                     ],
                   ),
@@ -117,11 +221,13 @@ class _SettingsState extends State<Settings> {
                     child: ElevatedButton(
                       onPressed: () async {
                         pickedTime = await showTimePicker(
-                            context: context, initialTime: timeOfDay);
+                          context: context,
+                          initialTime: timeOfDay,
+                        );
                         setState(() {
                           if (pickedTime != null) {
                             time =
-                                "${pickedTime!.hour}:${pickedTime!.minute} ${pickedTime!.period.name}";
+                                "${pickedTime!.hourOfPeriod}:${pickedTime!.minute.toString().padLeft(2, '0')} ${pickedTime!.period.name}";
                           }
                         });
                       },
