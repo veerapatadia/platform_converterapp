@@ -19,60 +19,70 @@ class Chats extends StatelessWidget {
     return (Provider.of<PlatformProvider>(context).isIOS)
         ? CupertinoPageScaffold(
             child: Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: CupertinoColors.black,
               ),
               child: ListView.builder(
                 itemCount: chatItems.length,
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 itemBuilder: (context, index) {
                   final chat = chatItems[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 8, top: 8),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: CupertinoColors.black,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CupertinoListTile(
-                          leading: CircleAvatar(
-                            radius: 30,
-                            backgroundImage: AssetImage(chat.imagePath),
-                          ),
-                          title: Text(
-                            chat.name,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                  return GestureDetector(
+                    onTap: () {
+                      showActionSheet(context, chat);
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 8, top: 15),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: CupertinoColors.black,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 8, top: 8),
+                          child: CupertinoListTile(
+                            leading: CircleAvatar(
+                              radius: 30,
+                              backgroundImage: AssetImage(chat.imagePath),
+                              child: chat.imagePath.isEmpty
+                                  ? Text(
+                                      chat.name[0].toUpperCase(),
+                                      style: TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  : null,
                             ),
-                          ),
-                          subtitle: Padding(
-                            padding: const EdgeInsets.only(top: 5),
-                            child: Text(
-                              chat.message,
+                            title: Text(
+                              chat.name,
                               style: TextStyle(
-                                fontSize: 14,
-                                color: CupertinoColors.inactiveGray,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ),
-                          trailing: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                chat.time,
+                            subtitle: Padding(
+                              padding: EdgeInsets.only(top: 5),
+                              child: Text(
+                                chat.message,
                                 style: TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 14,
                                   color: CupertinoColors.inactiveGray,
                                 ),
                               ),
-                              const SizedBox(height: 5),
-                              Icon(
-                                CupertinoIcons.chevron_forward,
-                                color: CupertinoColors.inactiveGray,
-                              ),
-                            ],
+                            ),
+                            trailing: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  chat.time,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: CupertinoColors.inactiveGray,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -411,39 +421,39 @@ class AlertBox extends StatelessWidget {
   }
 }
 
-class CupertinoListTile extends StatelessWidget {
-  final Widget leading;
-  final Widget title;
-  final Widget subtitle;
-  final Widget trailing;
-
-  CupertinoListTile({
-    required this.leading,
-    required this.title,
-    required this.subtitle,
-    required this.trailing,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        leading,
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                title,
-                SizedBox(height: 10),
-                subtitle,
-              ],
-            ),
-          ),
+void showActionSheet(BuildContext context, ChatItem chat) {
+  showCupertinoModalPopup(
+    context: context,
+    builder: (context) => CupertinoActionSheet(
+      title: Text(chat.name),
+      actions: [
+        CupertinoActionSheetAction(
+          child: Text('Message'),
+          onPressed: () async {
+            await launchUrl(Uri.parse("sms:${chat.contactNumber}"));
+            Navigator.pop(context);
+          },
         ),
-        trailing,
+        CupertinoActionSheetAction(
+          child: Text('Call'),
+          onPressed: () async {
+            await launchUrl(Uri.parse("tel:${chat.contactNumber}"));
+            Provider.of<CallProvider>(context, listen: false)
+                .addCallHistory(CallHistory(
+              name: chat.name,
+              contact: chat.contactNumber,
+              timestamp: DateTime.now(),
+            ));
+          },
+        ),
       ],
-    );
-  }
+      cancelButton: CupertinoActionSheetAction(
+        isDefaultAction: true,
+        child: Text('Cancel'),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+    ),
+  );
 }

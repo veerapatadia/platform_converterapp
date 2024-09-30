@@ -4,6 +4,7 @@ import 'package:platformconverterapp/provider/bottom_provider.dart';
 import 'package:platformconverterapp/provider/callprovider.dart';
 import 'package:platformconverterapp/provider/contact_provider.dart';
 import 'package:platformconverterapp/provider/image_provider.dart';
+import 'package:platformconverterapp/provider/ioscallprovider.dart';
 import 'package:platformconverterapp/provider/platform_provider.dart';
 import 'package:platformconverterapp/provider/stepper_provider.dart';
 import 'package:platformconverterapp/views/Android-view/homepage/screens/homepage_android.dart';
@@ -35,6 +36,7 @@ class _myAppState extends State<myApp> {
           ChangeNotifierProvider(create: (context) => ContactProvider()),
           ChangeNotifierProvider(create: (context) => imageProvider()),
           ChangeNotifierProvider(create: (context) => CallProvider()),
+          ChangeNotifierProvider(create: (context) => Ioscallprovider()),
         ],
         builder: (context, _) {
           return (Provider.of<PlatformProvider>(context).isIOS)

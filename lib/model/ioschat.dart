@@ -1,30 +1,88 @@
-final List<ChatItem> chatItems = [
-  ChatItem('Bruce Wayne', 'The night is darkest...', '9:15 pm',
-      'assets/images/bruce_wayne.jpg'),
-  ChatItem('Clark Kent', 'Up, up, and away!', '10:05 am',
-      'assets/images/clark_kent.jpg'),
-  ChatItem('Diana Prince', 'Truth will always prevail.', '11:30 am',
-      'assets/images/diana_prince.jpg'),
-  ChatItem('Arthur Curry', 'I control the seas.', '3:45 pm',
-      'assets/images/arthur_curry.jpg'),
-  ChatItem('Barry Allen', 'Speed is my thing.', '1:20 pm',
-      'assets/images/barry_allen.jpg'),
-  ChatItem('Victor Stone', 'I am more than just a machine.', '5:00 pm',
-      'assets/images/victor_stone.jpg'),
-  ChatItem('Lex Luthor', 'Power is everything.', 'Yesterday',
-      'assets/images/lex_luthor.jpg'),
-  ChatItem('Harley Quinn', 'Let’s cause some chaos!', 'Today',
-      'assets/images/harley_quinn.jpg'),
-  ChatItem('Joker', 'Why so serious?', 'Now', 'assets/images/joker.jpg'),
-  ChatItem('Alfred Pennyworth', 'Always at your service.', 'Now',
-      'assets/images/alfred_pennyworth.jpg'),
-];
-
 class ChatItem {
   final String name;
   final String message;
   final String time;
   final String imagePath;
+  final String contactNumber;
 
-  ChatItem(this.name, this.message, this.time, this.imagePath);
+  ChatItem({
+    required this.name,
+    required this.message,
+    required this.time,
+    required this.imagePath,
+    required this.contactNumber,
+  });
 }
+
+List<ChatItem> chatItems = [
+  ChatItem(
+    name: "Yashvi",
+    message: "Hey, how are you?",
+    time: "2:30 PM",
+    imagePath: "assets/download.png",
+    contactNumber: "9898569735",
+  ),
+  ChatItem(
+    name: "Foram",
+    message: "Let's meet tomorrow.",
+    time: "1:15 PM",
+    imagePath: "assets/download.png",
+    contactNumber: "9081342355",
+  ),
+  ChatItem(
+    name: "Aayushi",
+    message: "Do you want to grab lunch?",
+    time: "12:45 PM",
+    imagePath: "assets/download.png",
+    contactNumber: "2345678901",
+  ),
+  ChatItem(
+    name: "Khushi",
+    message: "I sent you the files.",
+    time: "11:30 AM",
+    imagePath: "assets/download.png",
+    contactNumber: "3456789012",
+  ),
+  ChatItem(
+    name: "Krupali",
+    message: "Check out this link!",
+    time: "10:00 AM",
+    imagePath: "assets/download.png",
+    contactNumber: "4567890123",
+  ),
+  ChatItem(
+    name: "Diya",
+    message: "Happy Birthday!",
+    time: "9:15 AM",
+    imagePath: "assets/download.png",
+    contactNumber: "5678901234",
+  ),
+  ChatItem(
+    name: "Divyanshi",
+    message: "Are we still on for the meeting?",
+    time: "8:00 AM",
+    imagePath: "assets/download.png",
+    contactNumber: "6789012345",
+  ),
+  ChatItem(
+    name: "Srishti",
+    message: "Good to see you yesterday!",
+    time: "Yesterday",
+    imagePath: "assets/download.png",
+    contactNumber: "7890123456",
+  ),
+  ChatItem(
+    name: "Rajiya",
+    message: "Let's go for a run this weekend.",
+    time: "Last Week",
+    imagePath: "assets/download.png",
+    contactNumber: "8901234567",
+  ),
+  ChatItem(
+    name: "Jiya",
+    message: "Can you send me the details?",
+    time: "Last Week",
+    imagePath: "assets/download.png",
+    contactNumber: "9012345678",
+  ),
+];
