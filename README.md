@@ -45,6 +45,13 @@ Smooth navigation and clean design for an enjoyable user experience.
 ![8](https://github.com/user-attachments/assets/53c3ac74-a972-41f6-94cb-d930c2a3ffec)
 ![9](https://github.com/user-attachments/assets/b1cd1a57-da87-4641-836e-0614211a0db8)
 
+![1](https://github.com/user-attachments/assets/175bc966-1530-4a2a-8b4f-eb106a39937e)
+![2](https://github.com/user-attachments/assets/d83665c9-4f1d-4acc-b4e1-cb342b3e9279)
+![3](https://github.com/user-attachments/assets/071c5ae5-61a2-4c6a-b61b-e5e5fecc4ae7)
+![4](https://github.com/user-attachments/assets/4f92296c-b52c-4cb4-8f03-d987af138991)
+![5](https://github.com/user-attachments/assets/c63e488d-db08-4f53-8bdd-0a3386859232)
+![6](https://github.com/user-attachments/assets/94e75c6a-4713-43c3-bb6e-8e6c50b53913)
+
 
 
 
